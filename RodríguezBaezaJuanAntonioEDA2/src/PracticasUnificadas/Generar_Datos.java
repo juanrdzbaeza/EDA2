@@ -4,10 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Clase Generar_Datos
+ * @author Grupo Iluminati
+ * @version 1.2
+ */
 public class Generar_Datos {
 
 	public static void generarDatos(String directorio) {
-
 		// Generamos los casos medios.
 		for (int n = 1; n <= 9; n++) {
 			int[] datos = calcularDatos(n);
@@ -24,11 +28,11 @@ public class Generar_Datos {
 			}
 		}
 
-
-
-		// Generamos los peores casos.
-		// Suponemos que es cuando el 50% de las manzanas tienen una cantidad de absentismo
-		// alto y el otro 50% tiene una cantidad de absentismo bajo.
+		/*
+		 * Generamos los peores casos.
+		 * Suponemos que es cuando el 50% de las manzanas tienen una cantidad 
+		 * de absentismo alto y el otro 50% tiene una cantidad de absentismo bajo.
+		 */ 
 		for (int n = 1; n <= 9; n++) {
 			int[] datos = calcularDatosPeor(n);
 			String nombreFichero = "datosPeor" + n + ".txt";
@@ -45,10 +49,11 @@ public class Generar_Datos {
 		}
 
 
-		// Generamos los mejores casos.
-		// Suponemos que es cuando una manzana concentra casi todo el absentismo y las demas manzanas tienen su
-		// absentismo a 1.
-
+		/* 
+		 * Generamos los mejores casos.
+		 * Suponemos que es cuando una manzana concentra casi todo el absentismo y las demas manzanas tienen su
+		 * absentismo a 1.
+		 */
 		for (int n = 1; n <= 9; n++) {
 			int[] datos = calcularDatosMejor(n);
 			String nombreFichero = "datosMejor" + n + ".txt";

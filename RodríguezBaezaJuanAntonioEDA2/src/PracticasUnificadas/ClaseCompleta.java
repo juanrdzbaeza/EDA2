@@ -2,13 +2,18 @@ package PracticasUnificadas;
 
 import java.util.Scanner;
 
+/**
+ * Clase ClaseCompleta
+ * @author Grupo Iluminati
+ * @version 1.2
+ */
 public class ClaseCompleta {
 	
 	public static void main(String[] args) {
 		
 		menu();
-	}
 	
+	}
 	
 	public static void menu(){
 		
@@ -28,13 +33,13 @@ public class ClaseCompleta {
 			opcion = menu.nextInt();
 			if(opcion < 1 || opcion > 3)
 				System.out.println("El numero elegido está fuera del intervalo permitido, insertelo nuevamente.");
-			}
-			while(opcion < 1 || opcion > 3);
+		}while(opcion < 1 || opcion > 3);
 
+		
 		
 		switch (opcion) {
 		case 1:
-			Programa.ejecutar1();
+			Programa.ejecutar1();			
 			break;
 			
 		case 2:
@@ -47,5 +52,6 @@ public class ClaseCompleta {
 		default:
 			break;
 		}
+		menu.close();
 	}
 }
