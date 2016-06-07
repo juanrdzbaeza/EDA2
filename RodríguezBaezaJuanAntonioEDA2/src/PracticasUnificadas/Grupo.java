@@ -1,5 +1,6 @@
 package PracticasUnificadas;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,9 +15,7 @@ import java.util.ArrayList;
  * @version 1.2
  */
 public class Grupo implements Serializable {
-
 	/**
-	 * Atributos:
 	 * numero: Ordinal del grupo
 	 * puntoCritico: manzana epicentro del grupo
 	 * manzanas: arrayList de manzanas del grupo
@@ -69,20 +68,31 @@ public class Grupo implements Serializable {
 	public void addManzana(Manzana m) {
 		manzanas.add(m);
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		String salida = "Grupo\t" + numero + "\t|\tPuntoCritico\t" + puntoCritico + "\t|\tManzanas\t" + manzanas.get(0);
+		String salida = "Grupo\t" + numero + "\t|\tPuntoCritico\t" + puntoCritico + "\n\n";// + "\t|\tManzanas\t" + manzanas.toString();
+		salida += " Manzanas que componen el grupo\n";
+		salida += "---------------------------------\n";
+
 		
-		for (int i = 1; i < manzanas.size(); i++) {
-			salida += "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + manzanas.get(i);
+		for (Manzana manzana : manzanas) {
+			salida += manzana.toString() + "\n";
 		}
 		
 		return salida;
+	}
+	
+	/**
+	 * Devuelve el ordinal del grupo
+	 * @return numero ordinal del grupo
+	 */
+	public int getNumero(){
+		return numero;
 	}
 
 	/**
@@ -90,6 +100,7 @@ public class Grupo implements Serializable {
 	 * @return manzanas.size()
 	 */
 	public int totalMan() {
+		
 		return manzanas.size();
 	}
 
@@ -112,8 +123,12 @@ public class Grupo implements Serializable {
 	 * @param g grupo para añadir
 	 */
 	public static void guardarGrupoObject(ArrayList<Grupo> g){
+		
+		String file =  "datos" + File.separator + "grupos.obj";
+		
 		try {
-			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("grupos.obj"));
+			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file));
+			
 			for (int i = 0; i < g.size(); i++) {
 				os.writeObject(g.get(i));
 			}
@@ -130,9 +145,12 @@ public class Grupo implements Serializable {
 	 * @throws ClassNotFoundException excepcion de la clase
 	 */
 	public static ArrayList<Grupo> leerGrupoObject() throws ClassNotFoundException{
+		
 		ArrayList<Grupo> a = new ArrayList<Grupo>();
+		String file =  "datos" + File.separator + "grupos.obj";
+		
 		try {
-			ObjectInputStream is = new ObjectInputStream(new FileInputStream("grupos.obj"));
+			ObjectInputStream is = new ObjectInputStream(new FileInputStream(file));
 			
 			Object aux = is.readObject();
 			

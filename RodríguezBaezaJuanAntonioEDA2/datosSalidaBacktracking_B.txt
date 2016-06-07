@@ -1,0 +1,7 @@
+Propuesta: 2 Grupo: 1 Comienzo: 0 Fin: 4 Recursos: (Trabajadores = 3, Psicologos = 4, Transporte = 4, Centro Social = 1)
+Propuesta: 4 Grupo: 2 Comienzo: 0 Fin: 4 Recursos: (Trabajadores = 3, Psicologos = 2, Transporte = 1, Centro Social = 0)
+Propuesta: 5 Grupo: 2 Comienzo: 4 Fin: 8 Recursos: (Trabajadores = 4, Psicologos = 5, Transporte = 1, Centro Social = 1)
+Propuesta: 6 Grupo: 1 Comienzo: 4 Fin: 6 Recursos: (Trabajadores = 1, Psicologos = 1, Transporte = 2, Centro Social = 0)
+Propuesta: 7 Grupo: 2 Comienzo: 8 Fin: 11 Recursos: (Trabajadores = 3, Psicologos = 5, Transporte = 4, Centro Social = 0)
+peso total: 3368
+

@@ -1,0 +1,12 @@
+Hay un total de 3 manzanas que superan la media de absentismo:
+ 
+La media es: 15. 
+ 
+ Manzana -->   Pos (Avnd, Calle) --> Absentismo
+ -------------------------------------------------
+   (6)	-->	(1,2)	-->	24
+   (16)	-->	(4,3)	-->	23
+   (17)	-->	(3,1)	-->	16
+
+
+El tiempo estimado para el algoritmo es de 63555.0 nanosegundos.

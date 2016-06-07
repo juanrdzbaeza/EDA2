@@ -1,6 +1,7 @@
 package PracticasUnificadas;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 /**
  * Clase Manzana
@@ -10,7 +11,6 @@ import java.io.Serializable;
 public class Manzana implements Comparable<Manzana>, Serializable{
 
 	/**
-	 * Atributos:
 	 * calle: calle de la manzana
 	 * avda: avenida de la manzana
 	 * abse: absentismo de la manzana
@@ -35,7 +35,7 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	}
 	
 	/**
-	 * Constructor de la clase
+	 * Constructor de la clase.
 	 * @param posicion posicion de la manzana
 	 * @param abse absentismo de la manzana
 	 */
@@ -47,13 +47,27 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	}
 
 	/**
+	 * Constructor de manzanas desde una cadena que se le
+	 * pasa por parametro.
+	 * @param cadena string de texto con informacion sobre la manzana
+	 */
+	public Manzana (String cadena) {
+		Scanner sc = new Scanner (cadena);
+		sc.useDelimiter("  ");
+		posicion = sc.nextInt();
+		avda = sc.nextInt();
+		calle = sc.nextInt();
+		abse = sc.nextInt();
+		sc.close();
+	}
+
+	/**
 	 * getPosicion()
 	 * @return posicion
 	 */
 	public int getPosicion() {
 		return posicion;
 	}
-
 	/**
 	 * setPosicion(int posicion)
 	 * @param posicion posicion de la manzana
@@ -61,7 +75,6 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}
-
 	/**
 	 * getCalle()
 	 * @return calle
@@ -69,7 +82,6 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	public int getCalle() {
 		return calle;
 	}
-
 	/**
 	 * setCalle(int calle)
 	 * @param calle calle de la manzana
@@ -77,7 +89,6 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	public void setCalle(int calle) {
 		this.calle = calle;
 	}
-
 	/**
 	 * getAvda()
 	 * @return avda
@@ -85,7 +96,6 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	public int getAvda() {
 		return avda;
 	}
-
 	/**
 	 * setAvda(int avda)
 	 * @param avda avenida de la manzana
@@ -93,7 +103,6 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	public void setAvda(int avda) {
 		this.avda = avda;
 	}
-
 	/**
 	 * getAbse()
 	 * @return abse
@@ -101,7 +110,6 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	public int getAbse() {
 		return abse;
 	}
-
 	/**
 	 * setAbse(int abse)
 	 * @param abse absentismo de la manzana
@@ -109,7 +117,6 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	public void setAbse(int abse) {
 		this.abse = abse;
 	}
-	
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -138,6 +145,7 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 	public void calcularCalleAvenida (int pos, int n) {
 		// Calculamos la posición real
 		int posReal = posicion - pos;
+		
 		int filas_columnas = (int) Math.pow(2, n);
 		int fila_inicial = 0;
 		int fila_final = filas_columnas -1;
@@ -149,18 +157,21 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 			int x = posReal / potencia;
 			switch (x) {
 			case 0:// Distrito 1
+				
 				//fila_inicial, columna_inicial son iguales
 				fila_final = fila_inicial + filas_columnas/2 - 1;
 				columna_final = columna_inicial + filas_columnas/2 - 1;
 				break;
 				
 			case 1:// Distrito 2
+				
 				//columna_inicial, columna_final son iguales
 				fila_inicial = fila_inicial + filas_columnas/2;
 				fila_final = fila_inicial + filas_columnas/2 - 1;
 				break;
 				
 			case 2:// Distrito 3
+				
 				//cambian los 4
 				fila_inicial = fila_inicial + filas_columnas/2;
 				fila_final = fila_inicial + filas_columnas/2 - 1;
@@ -169,6 +180,7 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 				break;
 				
 			case 3:// Distrito 4
+				
 				//fila_inicial, fila_final son iguales
 				columna_inicial = columna_inicial + filas_columnas/2;
 				columna_final = columna_inicial + filas_columnas/2 - 1;
@@ -182,4 +194,6 @@ public class Manzana implements Comparable<Manzana>, Serializable{
 		calle = fila_inicial + 1;
 		avda = columna_inicial + 1;
 	}
+	
+	
 }

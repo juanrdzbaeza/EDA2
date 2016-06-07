@@ -13,9 +13,8 @@ import java.util.Scanner;
  * @version 1.2
  */
 public class Programa {
-
+	
 	/**
-	 * Atributos:
 	 * FACTOR: factor para calcular la media de absentismo
 	 * listaSuperiores: lista enlazada de las manzanas
 	 */
@@ -23,12 +22,13 @@ public class Programa {
 	public static LinkedList<Manzana> listaSuperiores;
 
 
-	/**
+	/*
 	 * ejecutar para la practica 1
 	 */
 	public static void ejecutar1() {
 		
 		Scanner lectura = new Scanner(System.in);
+		
 		
 		String directorio = System.getProperty("user.dir" + File.separator);
 		
@@ -46,11 +46,12 @@ public class Programa {
 			opcion = lectura.nextInt();
 			if(opcion < 1 || opcion > 3)
 				System.out.println("El numero elegido está fuera del intervalo permitido, insertelo nuevamente.");
-		}while(opcion < 1 || opcion > 3);
+			}
+			while(opcion < 1 || opcion > 3);
 		
 		
 		int evaluacion = 0;
-		String archivoEntrada = "";
+		String archivoEntrada = "datos" + File.separator;
 		
 		
 		// MENU CONSOLA
@@ -62,10 +63,11 @@ public class Programa {
 			System.out.printf("Elija el n que desea evaluar entre 1 y 9: ");
 			
 			do{
-				evaluacion = lectura.nextInt();
-				if(evaluacion < 1 || evaluacion > 9)
-					System.out.println("El numero elegido está fuera del intervalo permitido, insertelo nuevamente.");
-			}while(evaluacion < 1 || evaluacion > 9);
+			evaluacion = lectura.nextInt();
+			if(evaluacion < 1 || evaluacion > 9)
+				System.out.println("El numero elegido está fuera del intervalo permitido, insertelo nuevamente.");
+			}
+			while(evaluacion < 1 || evaluacion > 9);
 			
 			int caso;
 			
@@ -87,20 +89,20 @@ public class Programa {
 			// ELECCIÓN CASO
 			
 			if(caso == 1)
-				archivoEntrada = "datosMejor" + evaluacion + ".txt";
+				archivoEntrada += "datosMejor" + evaluacion + ".txt";
 			else if(caso == 2)
-				archivoEntrada = "datosPeor" + evaluacion + ".txt";
+				archivoEntrada += "datosPeor" + evaluacion + ".txt";
 			else
-				archivoEntrada = "datos" + evaluacion + ".txt";
+				archivoEntrada += "datos" + evaluacion + ".txt";
 			
 			break;
 			
 			
 		case 2:
-			System.out.printf("Introduzca el archivo en la carpeta del programa...");
+			System.out.printf("Introduzca el archivo en la carpeta del programa DATOS");
 			System.out.println();
 			System.out.printf("Indique el nombre del archivo:  ");
-			archivoEntrada = lectura.next();
+			archivoEntrada = "datos" + File.separator + lectura.next();
 			break;
 
 		case 3:
@@ -117,9 +119,8 @@ public class Programa {
 		
 
 		// Inicio del proceso
-		                        //Introducir nombre del fichero aquí
+		                        
 			String nombreFichero = archivoEntrada;
-			//String nombreCompleto = directorio + nombreFichero;
 
 			try{
 				HashMap<Integer, Integer> hash = leerDatos (nombreFichero);
@@ -156,9 +157,8 @@ public class Programa {
 				System.out.println(nombreFichero+" --> "
 						+e.getMessage());
 			}
-			lectura.close();
 	}
-
+	
 	/**
 	 * Método para la direccion de cada manzana, llama al método 
 	 * calcularCalleAvenida(pos, n) de la clase manzana que es el 
@@ -166,10 +166,12 @@ public class Programa {
 	 * @param n
 	 */
 	private static void calcularAvndaCalle(int n) {
+		
 		int pos = posicionPrimeraManzana(n);
 		for (Manzana manzana : listaSuperiores) {
 			manzana.calcularCalleAvenida(pos, n);
 		}
+		
 	}
 
 	/**
@@ -178,13 +180,18 @@ public class Programa {
 	 * @return datos datos leidos
 	 */
 	public static HashMap<Integer, Integer> leerDatos (String nombreFichero) {
+
 		HashMap<Integer, Integer> datos = null;
+
 		try {
 			Scanner entrada = new Scanner (new File (nombreFichero));
+
 			// Calculamos la posición de la primera manzana.
 			int pos = 0;
+
 			// Inicializamos el Hash.
 			datos = new HashMap<Integer, Integer>();
+
 			while(entrada.hasNextLine()){
 				int abse = Integer.parseInt(entrada.nextLine());
 				datos.put(pos, abse);
@@ -197,6 +204,7 @@ public class Programa {
 		}
 		return datos;
 	}
+
 
 	/**
 	 * <p><strong>Método DIVIDE Y VENCERÁS; núcleo de la primera práctica 1.</strong></p>
@@ -240,9 +248,9 @@ public class Programa {
 		calcularSuperiores (hash, posicion*4+4, media);
 
 		// Una posible mejora seria calcular la operacion "posicion*4" y asignarsela a una
-		// variable, para posteriomente no tener que repetir la posicion
+		// variable, para posteriomente no tener que repetir la operación
 	}
-
+	
 	/**
 	 * Método que devuelve la posición de la primera manzana, como en la estructura
 	 * de datos estan ocupando las primeras posiciones los distritos, la primera
@@ -252,6 +260,7 @@ public class Programa {
 	 * @return pos posicion de la primera manzana
 	 */
 	public static int posicionPrimeraManzana(int n){
+
 		int pos = 0;
 		for (int i=0; i<n; i++)
 			pos = pos + (int)Math.pow(4, i);
@@ -266,8 +275,28 @@ public class Programa {
 	 * @param tiempo tiempo estimado para el algoritmo
 	 */
 	public static void guardarSuperiores (String nombreFichero, int media, long tiempo) {
+
+		
+		System.out.println("Hay un total de " + listaSuperiores.size() + " manzanas que superan la media de absentismo:\n");
+		System.out.println(" \n");
+		System.out.println("La media es: " + media + ". \n");
+		System.out.println(" \n");
+		System.out.println(" Manzana    Pos (Avnd, Calle) --> Absentismo\n");
+		System.out.println(" -------------------------------------------------\n");
+		for (Manzana man : listaSuperiores) {
+
+			System.out.println(man + "\n");
+		}
+		System.out.println("\n\nEl tiempo estimado para el algoritmo es de " + tiempo + " nanosegundos.");
+		
+		
+		
 		try {
+			
+			
 			PrintWriter f = new PrintWriter (new FileWriter (nombreFichero));
+			
+
 			f.write("Hay un total de " + listaSuperiores.size() + " manzanas que superan la media de absentismo:\n");
 			f.write(" \n");
 			f.write("La media es: " + media + ". \n");
@@ -275,9 +304,11 @@ public class Programa {
 			f.write(" Manzana    Pos (Avnd, Calle) --> Absentismo\n");
 			f.write(" -------------------------------------------------\n");
 			for (Manzana man : listaSuperiores) {
+
 				f.write(man + "\n");
 			}
 			f.write("\n\nEl tiempo estimado para el algoritmo es de " + tiempo + " nanosegundos.");
+
 			f.close();
 		}
 		catch (IOException e) {
@@ -290,27 +321,31 @@ public class Programa {
 	 * leidas en el fichero, estas han sido añadidas a un hashmap, de forma que,
 	 * si el tamaño del mapa es multiplo de 4, los datos son correctos y se devuelve
 	 * un entero n con el tamaño del problema 
-	 * @param HashMap<Integer, Integer> hash
+	 * @param hash
 	 * @return n tamaño de las manzanas
 	 */
 	private static int comprobar_n(HashMap<Integer, Integer> hash) {
+		// TODO Auto-generated method stub
+
 		int n = 0;
 		int suma = 0;
+
 		for (int i = 0; i < hash.size(); i++) {
+
 			suma += Math.pow(4, i);
+
 			if(suma == hash.size())
 				n = i;
 		}
 		return n;
 	}
-
 	/**
 	 * Método para comprobar que el tamaño de manzanas es adecuado. La comprobación
 	 * viene dada por la fórmula Math.pow(4, n), de manera que el número de manzanas
 	 * siempre debe ser múltiplo de 4, pero nunca mayor que el tamaño delpropio mapa.
 	 * Además, se comprueba tambien que el absentismo de un distrito sea la suma de
 	 * sus 4 hijos
-	 * @param HashMap<Integer, Integer> hash
+	 * @param hash
 	 */
 	private static void comprobarDatos(HashMap<Integer, Integer> hash) {
 		int numero = (int) Math.pow(4, 0);
